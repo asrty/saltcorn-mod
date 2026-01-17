@@ -83,11 +83,13 @@ const action_url = (
   colIdNm,
   confirm,
   colIndex,
-  runAsync
+  runAsync,
+  req
 ) => {
   const pk_name = table.pk_name;
-  const __ = getReq__();
-  const confirmStr = confirm ? `if(confirm('${__("Are you sure?")}'))` : "";
+  //const __ = getReq__();
+  const confirmMsg = req.__('Are you sure?');
+  const confirmStr = confirm ? `if(confirm('${confirmMsg}'))` : "";
   if (action_name === "Delete") {
     return {
       javascript: `${confirmStr}${isNode() ? "ajax" : "local"}_post_btn('${
@@ -933,7 +935,8 @@ const get_viewable_fields = (
               column.rndid ? "rndid" : "action_name",
               column.confirm,
               index,
-              column.run_async
+              column.run_async,
+              req
             );
             const label = column.action_label_formula
               ? eval_expression(
@@ -1807,7 +1810,8 @@ const standardBlockDispatch = (viewname, state, table, extra, row) => {
         "rndid",
         segment.confirm,
         undefined,
-        !!segment.run_async
+        !!segment.run_async,
+        req
       );
       if (
         segment.action_name === "Delete" &&

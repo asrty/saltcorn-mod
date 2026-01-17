@@ -714,12 +714,13 @@ const transformForm = async ({
           row,
           segment.rndid,
           "rndid",
-          segment.confirm
+          segment.confirm,
+          req
         );
         if (url.javascript) {
           //redo to include dynamic row
           const confirmStr = segment.confirm
-            ? `if(confirm('Are you sure?'))`
+            ? `if(confirm('${req.__('Are you sure?')}'))`
             : "";
           url.javascript = `${confirmStr}view_post(this, 'run_action', get_form_data(this, '${segment.rndid}') );`;
         }
@@ -737,12 +738,13 @@ const transformForm = async ({
           "rndid",
           segment.confirm,
           undefined,
-          segment.run_async
+          segment.run_async,
+          req
         );
         if (url.javascript) {
           //redo to include dynamic row
           const confirmStr = segment.confirm
-            ? `if(confirm('Are you sure?'))`
+            ? `if(confirm('${req.__('Are you sure?')}'))`
             : "";
 
           url.javascript = `${confirmStr}view_post(this, 'run_action', {rndid:'${segment.rndid}', ...get_form_record(this)});`;
