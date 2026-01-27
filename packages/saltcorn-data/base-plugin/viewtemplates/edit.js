@@ -2078,7 +2078,7 @@ const prepare = async (
       ? await getRowByIdQuery(id)
       : await table.getRow({ id }, { forUser: req.user, forPublic: !req.user });
   } else {
-    row = { ...form.values };
+    row = { ...use_fixed, ...form.values };
   }
   for (const field of form.fields.filter((f) => f.isRepeat)) {
     delete row[field.name];

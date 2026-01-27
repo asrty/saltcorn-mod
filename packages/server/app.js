@@ -102,7 +102,7 @@ const getApp = async (opts = {}) => {
   // logo após const app = express();
   app.use((req, res, next) => {
     const client_ip = req.headers["cf-connecting-ip"] || req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
-    console.log("Cliente IP:", client_ip);
+    // console.log("Cliente IP:", client_ip);
     req.ip = client_ip; // opcional: anexar no req
     next();
   });
